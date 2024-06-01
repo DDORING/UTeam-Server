@@ -22,14 +22,13 @@ public class PersonController {
         this.personService = personService;
     }
 
-    @PostMapping("/upload/{memberId}")
+    @PostMapping("/upload")
     @Operation(summary = "인물 생성 및 수정 API", description = "인물의 이름 및 이미지 생성")
     public ResponseEntity<PersonDto> uploadPersonInfo(
-            @PathVariable Long memberId,
             @RequestParam("name") String name,
             @RequestParam("photo") MultipartFile photo) {
         try {
-            Person person = personService.createOrUpdatePerson(memberId, photo, name);
+            Person person = personService.createOrUpdatePerson(photo, name);
             PersonDto personDto = new PersonDto(person.getName(), person.getPhoto());
             return ResponseEntity.ok(personDto);
         } catch (Exception e) {
@@ -39,10 +38,10 @@ public class PersonController {
     }
 
     // 인물 조회
-    @GetMapping("/get/{memberId}")
+    @GetMapping("/get")
     @Operation(summary = "인물 조회 API", description = "인물의 이름 및 이미지 조회")
-    public ResponseEntity<PersonDto> getFavoritePerson(@PathVariable Long memberId) {
-        return personService.findPerson(memberId)
+    public ResponseEntity<PersonDto> getFavoritePerson() {
+        return personService.findPerson()
                 .map(person -> new PersonDto(person.getName(), person.getPhoto()))
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
