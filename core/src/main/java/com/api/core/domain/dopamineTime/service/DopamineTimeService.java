@@ -13,6 +13,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -21,14 +23,15 @@ public class DopamineTimeService {
     private final DopamineTimeRepository dopamineTimeRepository;
 
     @Transactional
-    public DopamineTimeRes startDopamineTime(){
+    public DopamineTimeRes startDopamineTime(DopamineTimeReq req){
         Member member = authService.getMember();
 
-        if(!dopamineTimeRepository.existsDopamineTimeByMemberAndIsFinishedFalse(member)){
+        if(!dopamineTimeRepository.existsDopamineTimeByMemberAndIsFinishedFalse(member)
+                && dopamineTimeRepository.existsDopamineTimeByMember(member)){
             throw new BusinessException(ErrorCode.ALREADY_CREATE_DOPAMINETIME);
         };
 
-        DopamineTime dopamineTime = new DopamineTime(member, false, false, false, null);
+        DopamineTime dopamineTime = new DopamineTime(member, false, false, false, LocalDateTime.now(), req.totalDopTime());
 
         DopamineTime startedDopTime = dopamineTimeRepository.save(dopamineTime);
         return DopamineTimeRes.of(startedDopTime);

@@ -29,6 +29,10 @@ public record DopamineTimeRes (
                description = "도파민 충전 시간 종료 여부 관리"
        )
        Boolean isFinished,
+        @Schema(
+                description = "도파민 충전 시간 관리"
+        )
+        Long totalDopTime,
 
        @Schema(
                description = "도파민 충전 시간 종료 시간 관리"
@@ -42,6 +46,7 @@ public record DopamineTimeRes (
                 .isExtended(dopamineTime.isExtended())
                 .isStoped(dopamineTime.isStoped())
                 .isFinished(dopamineTime.isFinished())
+                .totalDopTime(dopamineTime.getTotalDoptime())
                 .endTime(dopamineTime.getEndTime())
                 .build();
     }

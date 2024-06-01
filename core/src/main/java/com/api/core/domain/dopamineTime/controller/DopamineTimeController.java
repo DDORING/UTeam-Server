@@ -19,8 +19,8 @@ public class DopamineTimeController {
 
     @PostMapping("")
     @Operation(summary = "도파민 충전 시간 실행 API", description = "도파민 충전 시간 실행 버튼 시 생성")
-    public ApplicationResponse<DopamineTimeRes> startDopamineTime(){
-        return ApplicationResponse.ok(dopamineTimeService.startDopamineTime());
+    public ApplicationResponse<DopamineTimeRes> startDopamineTime(@RequestBody DopamineTimeReq req){
+        return ApplicationResponse.ok(dopamineTimeService.startDopamineTime(req));
     }
 
     @PutMapping("/{id}")
