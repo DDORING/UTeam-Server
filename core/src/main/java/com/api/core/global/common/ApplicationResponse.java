@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public record ApplicationResponse<T>(
         LocalDateTime timestamp,
+        Integer code,
         String message,
         T data
 ) {
@@ -17,6 +18,7 @@ public record ApplicationResponse<T>(
     public static <T> ApplicationResponse<T> ok(T data) {
         return ApplicationResponse.<T>builder()
                 .timestamp(LocalDateTime.now())
+                .code(ErrorCode.SUCCESS.getCode())
                 .message(ErrorCode.SUCCESS.getMessage())
                 .data(data)
                 .build();
@@ -25,6 +27,7 @@ public record ApplicationResponse<T>(
     public static <T> ApplicationResponse<T> ok() {
         return ApplicationResponse.<T>builder()
                 .timestamp(LocalDateTime.now())
+                .code(ErrorCode.SUCCESS.getCode())
                 .message(ErrorCode.SUCCESS.getMessage())
                 .build();
     }
