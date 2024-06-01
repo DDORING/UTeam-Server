@@ -54,7 +54,7 @@ public class FcmService {
      * @return Bearer token
      */
     private String getAccessToken() throws IOException {
-        String firebaseConfigPath = "core/src/main/java/com/api/core/global/firebase/ddoring-b727d-firebase-adminsdk-nc4qx-b5e2b5d7ca.json";
+        String firebaseConfigPath = "firebase/ddoring-b727d-firebase-adminsdk-nc4qx-b5e2b5d7ca.json";
 
         GoogleCredentials googleCredentials = GoogleCredentials
                 .fromStream(new ClassPathResource(firebaseConfigPath).getInputStream())
