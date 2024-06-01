@@ -12,7 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequestMapping("/person")
-@Tag(name = "Person", description = "사용자가 선택한 인물(연예인 등) 관련 API")
+@Tag(name = "Person", description = "인물(연예인 등) 관련 API")
 public class PersonController {
 
     private final PersonService personService;
