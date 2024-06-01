@@ -37,7 +37,11 @@ public record DopamineTimeRes (
        @Schema(
                description = "도파민 충전 시간 종료 시간 관리"
        )
-       LocalDateTime endTime
+       LocalDateTime endTime,
+        @Schema(
+                description = "도파민 충전 남은 시간 관리"
+        )
+        Long remainingTime
 ) {
     public static DopamineTimeRes of(DopamineTime dopamineTime){
         return DopamineTimeRes.builder()
@@ -48,6 +52,7 @@ public record DopamineTimeRes (
                 .isFinished(dopamineTime.isFinished())
                 .totalDopTime(dopamineTime.getTotalDoptime())
                 .endTime(dopamineTime.getEndTime())
+                .remainingTime(dopamineTime.getRemainingTime())
                 .build();
     }
 

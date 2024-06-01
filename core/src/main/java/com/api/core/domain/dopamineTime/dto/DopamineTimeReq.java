@@ -24,7 +24,16 @@ public record DopamineTimeReq(
         @Schema(
                 description = "도파민 충전 시간 관리"
         )
-        Long totalDopTime
+        Long totalDopTime,
+
+        @Schema(
+                description = "도파민 충전 남은 시간 관리"
+        )
+        Long remainingTime,
+        @Schema(
+                description = "도파민 충전 시간 종료 시간 관리"
+        )
+        LocalDateTime endTime
 ) {
 
     @Builder
@@ -34,6 +43,7 @@ public record DopamineTimeReq(
                 .isFinished(isFinished)
                 .isStoped(isStoped)
                 .totalDoptime(totalDopTime)
+                .remainingTime(remainingTime)
                 .build();
     }
 

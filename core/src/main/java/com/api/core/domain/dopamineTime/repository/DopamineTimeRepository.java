@@ -5,10 +5,10 @@ import com.api.core.domain.member.entity.Member;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface DopamineTimeRepository extends JpaRepository<DopamineTime, Long> {
-    Boolean existsDopamineTimeByMemberAndIsFinishedFalse(Member member);
+    Boolean existsDopamineTimeByMemberAndIsFinishedTrue(Member member);
 
     DopamineTime findByIdAndMember(Long id, Member member);
 
     Boolean existsDopamineTimeByMember(Member member);
-    Boolean existsDopamineTimeByIdAndIsFinishedFalse(Long dopTime_id);
+    Boolean existsDopamineTimeByIdAndIsFinishedTrue(Long dopTime_id);
 }

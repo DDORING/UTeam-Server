@@ -34,30 +34,45 @@ public class DopamineTime extends BaseTimeEntity {
     @Column(name="is_stoped", nullable = false, columnDefinition =  "tinyint")
     private boolean isStoped;
 
-    @Column(name="total_doptime", nullable = false, columnDefinition = "bigint")
-    private Long totalDoptime; //단위:분
+    @Column(name="total_doptime", nullable = true, columnDefinition = "bigint")
+    private long totalDoptime; //단위:분
 
     @Column(name = "end_time", nullable = true, columnDefinition = "timestamp")
     private LocalDateTime endTime;
 
+    @Column(name="remaining_time", nullable = true, columnDefinition = "bigint")
+    private long remainingTime; //단위:분
+
     @Builder
-    public DopamineTime(Member member, boolean isExtended, boolean isFinished, boolean isStoped, LocalDateTime startTime, long totalDoptime){
+    public DopamineTime(Member member, boolean isExtended, boolean isFinished, boolean isStoped, LocalDateTime startTime, long totalDoptime, long remainingTime) {
         this.member = member;
         this.isExtended = isExtended;
         this.isFinished = isFinished;
         this.isStoped = isStoped;
         this.totalDoptime = totalDoptime;
         this.endTime = calculateEndTime(startTime, totalDoptime);
+        this.remainingTime = remainingTime;
     }
 
-    private LocalDateTime calculateEndTime(LocalDateTime startTime, long totalDoptime) {
-        return startTime.plus(totalDoptime, ChronoUnit.MINUTES);
+    private LocalDateTime calculateEndTime(LocalDateTime time, long doptime) {
+        return time.plus(doptime, ChronoUnit.MINUTES);
     }
 
-    public void stop(DopamineTimeReq req){
+    public void stop(DopamineTimeReq req) {
+        this.remainingTime = ChronoUnit.MINUTES.between(LocalDateTime.now(),req.endTime());
         this.isStoped = true;
-        this.isFinished = req.isFinished();
-        this.isExtended = req.isExtended();
         this.endTime = null;
     }
+
+    public void restart(DopamineTimeReq req) {
+        this.isStoped = false;
+        this.endTime = calculateEndTime(LocalDateTime.now(), req.remainingTime());
+    }
+
+    public void extend(DopamineTimeReq req) {
+        this.isStoped = req.isStoped();
+        this.isExtended = true;
+        this.endTime = calculateEndTime(req.endTime(), 5);
+    }
 }
+
