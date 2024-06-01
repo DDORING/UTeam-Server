@@ -33,4 +33,13 @@ public class PersonController {
             return ResponseEntity.badRequest().body(null);
         }
     }
+
+    // 인물 조회
+    @GetMapping("/get/{memberId}")
+    public ResponseEntity<PersonDto> getFavoritePerson(@PathVariable Long memberId) {
+        return personService.findPerson(memberId)
+                .map(person -> new PersonDto(person.getName(), person.getPhoto()))
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
 }
