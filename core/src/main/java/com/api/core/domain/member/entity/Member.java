@@ -19,7 +19,7 @@ public class Member extends BaseTimeEntity {
     private String nickname;
     private String email;
     private String password;
-    private Character character;
+    private Character characters;
     private String imageUrl;
 
     @Enumerated(EnumType.STRING)
@@ -33,7 +33,7 @@ public class Member extends BaseTimeEntity {
 
     public void update(MemberServiceDto dto) {
         this.email = dto.getEmail();
-        this.character = dto.getCharacter();
+        this.characters = dto.getCharacter();
         this.imageUrl = dto.getImageUrl();
         this.nickname = dto.getNickname();
     }
