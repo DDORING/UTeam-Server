@@ -18,17 +18,20 @@ public class DopamineTimeController {
 
     @PostMapping("")
     @Operation(summary = "도파민 충전 시간 실행 API", description = "도파민 충전 시간 실행 버튼 시 생성")
-    public ApplicationResponse<DopamineTimeRes> startDopamineTime(){
-        return ApplicationResponse.ok(dopamineTimeService.startDopamineTime());
+    public ApplicationResponse<DopamineTimeRes> startDopamineTime(@RequestBody DopamineTimeReq req){
+        return ApplicationResponse.ok(dopamineTimeService.startDopamineTime(req));
     }
-    /*
 
-    @GetMapping("/{id}")
-    @Operation(summary = "도파민 충전 시간 중지 API", description = "도파민 충전 시간 중지 버튼 시 요청")
-    public ApplicationResponse<DopamineTimeRes> stopDopamineTime(){
-        return ApplicationResponse.ok(dopamineTimeService.stopDopamineTime());
+    @PutMapping("/stop/{id}")
+    @Operation(summary = "도파민 충전 시간 중지/재시작 API", description = "도파민 충전 시간 중지/재시작 버튼 시 요청")
+    public ApplicationResponse<DopamineTimeRes> stopDopamineTime(@PathVariable("id")Long id,  @RequestBody DopamineTimeReq req){
+        return ApplicationResponse.ok(dopamineTimeService.modifyDopamineTime(id, req));
     }
-    
-     */
+
+    @PutMapping("/{id}")
+    @Operation(summary = "도파민 충전 시간 연장 API", description = "도파민 충전 시간 연장 버튼 시 요청")
+    public ApplicationResponse<DopamineTimeRes> extendDopamineTime(@PathVariable("id")Long id, @RequestBody DopamineTimeReq req){
+        return ApplicationResponse.ok(dopamineTimeService.extendDopamineTime(id, req));
+    }
 
 }
