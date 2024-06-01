@@ -1,0 +1,3 @@
+spring:
+  config:
+    import: classpath:ddoring-core-config/application-dev.yml
