@@ -1,5 +1,6 @@
 package com.api.core.domain.member.dto;
 
+import com.api.core.domain.member.entity.Character;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
