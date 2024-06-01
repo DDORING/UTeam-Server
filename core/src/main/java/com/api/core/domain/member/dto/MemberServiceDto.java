@@ -9,6 +9,7 @@ import lombok.Getter;
 @AllArgsConstructor
 public class MemberServiceDto {
     private String email;
+    private Character character;
     private String nickname;
     private String imageUrl;
 }

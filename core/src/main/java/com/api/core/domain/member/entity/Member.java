@@ -32,6 +32,7 @@ public class Member extends BaseTimeEntity {
 
     public void update(MemberServiceDto dto) {
         this.email = dto.getEmail();
+        this.character = dto.getCharacter();
         this.imageUrl = dto.getImageUrl();
         this.nickname = dto.getNickname();
     }

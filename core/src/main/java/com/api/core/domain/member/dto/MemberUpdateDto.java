@@ -14,9 +14,13 @@ public class MemberUpdateDto {
     @Schema(description = "변경할 닉네임")
     private String nickname;
 
+    @Schema(description = "선택한 캐릭터")
+    private Character character;
+
     public MemberServiceDto toServiceDto(String email) {
         return MemberServiceDto.builder()
                 .email(email)
+                .character(this.character)
                 .nickname(this.nickname)
                 .build();
     }
