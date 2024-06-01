@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.Optional;
 
 @Service
 public class PersonService {
@@ -25,6 +26,10 @@ public class PersonService {
         this.personRepository = personRepository;
         this.memberRepository = memberRepository;
         this.s3Service = s3Service;
+    }
+
+    public Optional<Person> findPerson(Long memberId) {
+        return personRepository.findByMemberId(memberId);
     }
 
     @Transactional
