@@ -1,5 +1,10 @@
 name: DDRING Backend CI/CD
 
+defaults:
+  run:
+    shell: bash
+    working-directory: ./core
+
 # dev 브랜치에 코드가 push 되거나 pull_request 되었을 때 이 파일의 내용이 실행됨
 on:
   push:
@@ -45,12 +50,12 @@ jobs:
       # gradle을 통해 소스 빌드
       - name: Build with Gradle
         run: |
-          chmod +x ./core/gradlew
-          ./core/gradlew clean build -x test
+          chmod +x ./gradlew
+          ./gradlew clean build -x test
 
       # dockerfile을 통해 이미지를 빌드하고, 이를 docker repo로 push
       - name: Docker build & push CORE to docker repo
-        working-directory: ./core/
+        working-directory: ./core
         run: |
           docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
           docker build -f Dockerfile -t ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPO }} .
