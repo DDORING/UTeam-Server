@@ -40,6 +40,10 @@ jobs:
           echo "AWS_DEFAULT_REGION=ap-northeast-2" >> $GITHUB_ENV
           echo "AWS_SG_NAME=launch-wizard-1" >> $GITHUB_ENV
 
+      - run : echo "${{ secrets.GOOGLE_SERVICES_JSON }}" > ~/
+      - run : echo "${{ secrets.FIREBASE_SDK_JSON }}" > ./src/main/resources/firebase/ddoring-b727d-firebase-adminsdk-nc4qx-b5e2b5d7ca.json
+      
+
       # open jdk 17 버전 환경을 세팅
       - name: Set up JDK 17
         uses: actions/setup-java@v3
