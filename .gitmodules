@@ -1,0 +1,4 @@
+[submodule "core/src/main/resources/ddoring-core-config"]
+	path = core/src/main/resources/ddoring-core-config
+	url = https://github.com/yeonjy/ddoring-core-config.git
+	branch = main
