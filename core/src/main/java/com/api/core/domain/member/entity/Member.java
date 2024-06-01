@@ -19,6 +19,7 @@ public class Member extends BaseTimeEntity {
     private String nickname;
     private String email;
     private String password;
+    private Character character;
     private String imageUrl;
 
     @Enumerated(EnumType.STRING)
