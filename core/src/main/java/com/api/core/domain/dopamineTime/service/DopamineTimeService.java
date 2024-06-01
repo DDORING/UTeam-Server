@@ -19,7 +19,7 @@ public class DopamineTimeService {
 
     @Transactional
     public DopamineTimeRes startDopamineTime(){
-        DopamineTime dopamineTime = new DopamineTime(authService.getMember(), false, false, null);
+        DopamineTime dopamineTime = new DopamineTime(authService.getMember(), false, false, false, null);
 
         DopamineTime startedDopTime = dopamineTimeRepository.save(dopamineTime);
         return DopamineTimeRes.of(startedDopTime);

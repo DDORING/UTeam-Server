@@ -10,12 +10,14 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-@RequestMapping("/dopamineTime")
+@RestController
+@RequestMapping("dopamine-time")
 @RequiredArgsConstructor
 @Tag(name = "DopamineTime", description = "도파민 충전 시간 관련 API")
 public class DopamineTimeController {
-    DopamineTimeService dopamineTimeService;
+    private final DopamineTimeService dopamineTimeService;
 
     @PostMapping("")
     @Operation(summary = "도파민 충전 시간 실행 API", description = "도파민 충전 시간 실행 버튼 시 생성")

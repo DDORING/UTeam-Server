@@ -18,7 +18,7 @@ public class DopamineTime {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long doptime_id;
 
-    @ManyToOne(targetEntity = Member.class, fetch = FetchType.EAGER)
+    @ManyToOne(targetEntity = Member.class, fetch = FetchType.LAZY)
     @JoinColumn(name="member_id")
     private Member member;
 
@@ -28,14 +28,18 @@ public class DopamineTime {
     @Column(name="is_extended", nullable = false, columnDefinition =  "tinyint")
     private boolean isExtended;
 
+    @Column(name="is_stoped", nullable = false, columnDefinition =  "tinyint")
+    private boolean isStoped;
+
     @Column(name = "end_time", nullable = true, columnDefinition = "timestamp")
     private LocalDateTime endTime;
 
     @Builder
-    public DopamineTime(Member member, boolean isExtended, boolean isFinished, LocalDateTime endTime){
+    public DopamineTime(Member member, boolean isExtended, boolean isFinished, boolean isStoped, LocalDateTime endTime){
         this.member = member;
         this.isExtended = isExtended;
         this.isFinished = isFinished;
+        this.isStoped = isStoped;
         this.endTime = endTime;
     }
 }

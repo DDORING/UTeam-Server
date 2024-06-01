@@ -16,11 +16,15 @@ public record DopamineTimeRes (
         @Schema(
                 description = "사용자 관리"
         )
-        Member member,
+        Long member_id,
         @Schema(
             description = "도파민 충전 시간 연장 여부 관리"
         )
        Boolean isExtended,
+        @Schema(
+                description = "도파민 충전 시간 중지 여부 관리"
+        )
+        Boolean isStoped,
        @Schema(
                description = "도파민 충전 시간 종료 여부 관리"
        )
@@ -34,8 +38,9 @@ public record DopamineTimeRes (
     public static DopamineTimeRes of(DopamineTime dopamineTime){
         return DopamineTimeRes.builder()
                 .id(dopamineTime.getDoptime_id())
-                .member(dopamineTime.getMember())
+                .member_id(dopamineTime.getMember().getId())
                 .isExtended(dopamineTime.isExtended())
+                .isStoped(dopamineTime.isStoped())
                 .isFinished(dopamineTime.isFinished())
                 .endTime(dopamineTime.getEndTime())
                 .build();

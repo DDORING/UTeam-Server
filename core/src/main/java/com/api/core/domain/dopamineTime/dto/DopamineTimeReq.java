@@ -11,6 +11,10 @@ public record DopamineTimeReq(
                 description = "도파민 충전 시간 연장 여부 관리"
         )
         Boolean isExtended,
+        @Schema(
+                description = "도파민 충전 시간 중지 여부 관리"
+        )
+        Boolean isStoped,
 
         @Schema(
                 description = "도파민 충전 시간 종료 여부 관리"
