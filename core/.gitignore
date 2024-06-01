@@ -39,3 +39,7 @@ out/
 ### Firebase ###
 google-services.json
 ddoring-b727d-firebase-adminsdk-nc4qx-b5e2b5d7ca.json
+
+application.yml
+application-dev.yml
+application-local.yml
