@@ -37,7 +37,7 @@ public record DopamineTimeRes (
 ) {
     public static DopamineTimeRes of(DopamineTime dopamineTime){
         return DopamineTimeRes.builder()
-                .id(dopamineTime.getDoptime_id())
+                .id(dopamineTime.getId())
                 .member_id(dopamineTime.getMember().getId())
                 .isExtended(dopamineTime.isExtended())
                 .isStoped(dopamineTime.isStoped())

@@ -6,4 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface DopamineTimeRepository extends JpaRepository<DopamineTime, Long> {
     Boolean existsDopamineTimeByMemberAndIsFinishedFalse(Member member);
+
+    DopamineTime findByIdAndMember(Long id, Member member);
+    Boolean existsDopamineTimeByIdAndIsFinishedFalse(Long dopTime_id);
 }

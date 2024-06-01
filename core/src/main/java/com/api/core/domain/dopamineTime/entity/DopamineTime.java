@@ -1,5 +1,6 @@
 package com.api.core.domain.dopamineTime.entity;
 
+import com.api.core.domain.dopamineTime.dto.DopamineTimeReq;
 import com.api.core.domain.member.entity.Member;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -16,7 +17,7 @@ public class DopamineTime {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long doptime_id;
+    private Long id;
 
     @ManyToOne(targetEntity = Member.class, fetch = FetchType.LAZY)
     @JoinColumn(name="member_id")
@@ -31,6 +32,11 @@ public class DopamineTime {
     @Column(name="is_stoped", nullable = false, columnDefinition =  "tinyint")
     private boolean isStoped;
 
+    /*
+    @Column(name="total_doptime", nullable = false, columnDefinition = "bigint")
+    private Long totalDoptime;
+     */
+
     @Column(name = "end_time", nullable = true, columnDefinition = "timestamp")
     private LocalDateTime endTime;
 
@@ -41,5 +47,12 @@ public class DopamineTime {
         this.isFinished = isFinished;
         this.isStoped = isStoped;
         this.endTime = endTime;
+    }
+
+    public void stop(DopamineTimeReq req){
+        this.isStoped = true;
+        this.isFinished = req.isFinished();
+        this.isExtended = req.isExtended();
+        this.endTime = req.endTime();
     }
 }

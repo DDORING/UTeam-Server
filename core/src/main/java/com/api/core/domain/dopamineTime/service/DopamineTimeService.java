@@ -33,4 +33,19 @@ public class DopamineTimeService {
         DopamineTime startedDopTime = dopamineTimeRepository.save(dopamineTime);
         return DopamineTimeRes.of(startedDopTime);
     }
+
+    @Transactional
+    public DopamineTimeRes stopDopamineTime(Long id, DopamineTimeReq req){
+        if(!dopamineTimeRepository.existsDopamineTimeByIdAndIsFinishedFalse(id)) {
+            throw new BusinessException(ErrorCode.ALREADY_PASSED_DOPAMINETIME);
+        }
+
+
+        Member member = authService.getMember();
+
+        DopamineTime dopamineTime = dopamineTimeRepository.findByIdAndMember(id, member);
+
+        dopamineTime.stop(req);
+        return DopamineTimeRes.of(dopamineTime);
+    }
 }

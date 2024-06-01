@@ -5,6 +5,7 @@ import com.api.core.domain.dopamineTime.dto.DopamineTimeRes;
 import com.api.core.domain.dopamineTime.service.DopamineTimeService;
 import com.api.core.global.common.ApplicationResponse;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -21,14 +22,11 @@ public class DopamineTimeController {
     public ApplicationResponse<DopamineTimeRes> startDopamineTime(){
         return ApplicationResponse.ok(dopamineTimeService.startDopamineTime());
     }
-    /*
 
-    @GetMapping("/{id}")
+    @PutMapping("/{id}")
     @Operation(summary = "도파민 충전 시간 중지 API", description = "도파민 충전 시간 중지 버튼 시 요청")
-    public ApplicationResponse<DopamineTimeRes> stopDopamineTime(){
-        return ApplicationResponse.ok(dopamineTimeService.stopDopamineTime());
+    public ApplicationResponse<DopamineTimeRes> stopDopamineTime(@PathVariable("id")Long id,  @RequestBody DopamineTimeReq req){
+        return ApplicationResponse.ok(dopamineTimeService.stopDopamineTime(id, req));
     }
-    
-     */
 
 }

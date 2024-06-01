@@ -32,6 +32,7 @@ public record DopamineTimeReq(
         return DopamineTime.builder()
                 .isExtended(isExtended)
                 .isFinished(isFinished)
+                .isStoped(isStoped)
                 .endTime(endTime)
                 .build();
     }
