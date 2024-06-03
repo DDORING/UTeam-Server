@@ -34,7 +34,7 @@ public class FcmService {
 
         HttpEntity entity = new HttpEntity<>(message, headers);
 
-        String API_URL = "<https://fcm.googleapis.com/v1/projects/ddoring-b727d/messages:send>";
+        String API_URL = "https://fcm.googleapis.com/v1/projects/ddoring-b727d/messages:send";
         ResponseEntity<String> response = null;
         try {
             response = restTemplate.exchange(API_URL, HttpMethod.POST, entity, String.class);
@@ -58,7 +58,7 @@ public class FcmService {
 
         GoogleCredentials googleCredentials = GoogleCredentials
                 .fromStream(new ClassPathResource(firebaseConfigPath).getInputStream())
-                .createScoped(List.of("<https://www.googleapis.com/auth/cloud-platform>"));
+                .createScoped(List.of("https://www.googleapis.com/auth/cloud-platform"));
 
         googleCredentials.refreshIfExpired();
         return googleCredentials.getAccessToken().getTokenValue();
